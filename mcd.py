@@ -3,7 +3,7 @@ import numpy as np
 from donnee import  *
 
 
-def mdd(vq1,vq2,vq3,vq4):
+def mcd(vq1,vq2,vq3,vq4):
     Jacob=np.array([0, 0, 0, 0],
                    [L2+L3+L4, L3+L4, 0, 0],
                    [0, 0, 1, 0],
