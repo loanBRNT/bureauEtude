@@ -25,13 +25,15 @@ def mgd(q1,q2,q3,q4):
 
     T34 = np.array([[np.cos(q4), -np.sin(q4), 0, L4],
                     [np.sin(q4), np.cos(q4), 0, 0],
-                    [0, 0, 1, 0],
+                    [0, 0, 1, h2],
                     [0, 0, 0, 1]])
 
     T45 = np.array([[1, 0, 0, L5],
                     [0, 1, 0, 0],
-                    [0, 0, 1, h2],
+                    [0, 0, 1, 0],
                     [0, 0, 0, 1]])
+
+
 
     T35 = np.dot(T34,T45)
     T25 = np.dot(T23, T35)
@@ -45,8 +47,14 @@ def mgd(q1,q2,q3,q4):
     if not verif(T05):
         print("error")
         return None,None,None,None
-    te = np.arccos(T05[0][0])
 
-    return x,y,z,te
 
+    teCos = np.arccos(T05[0][0])
+    teSin = np.arcsin(T05[1][0])
+    if teSin < 0:
+        teta = -teCos
+    else:
+        teta = teCos
+
+    return x,y,z,teta
 

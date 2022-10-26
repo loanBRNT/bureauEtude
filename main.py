@@ -1,9 +1,34 @@
+import numpy as np
+
 from mgi import*
 from mgd import*
-print(np.pi/2)
 print("\n")
+
 x,y,z,teta = mgd(0,0,1,0)
 print("x=",x," y=",y," z=",z, " teta=",teta)
+x,y,z,teta = mgd(np.pi/2,0,1,0)
+print("x=",x," y=",y," z=",z, " teta=",teta)
+x,y,z,teta = mgd(3*np.pi/2,np.pi,1,0)
+print("x=",x," y=",y," z=",z
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      , " teta=",teta)
+
 
 
 '''
