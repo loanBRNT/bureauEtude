@@ -2,36 +2,23 @@ import numpy as np
 
 from mgi import*
 from mgd import*
-print("\n")
+from traj import*
+
+A=[1,1,1]
+B=[6,6,6]
+V=10
+traj(A,B,V)
+
+'''print("\n")
 
 x,y,z,teta = mgd(0,0,1,0)
 print("x=",x," y=",y," z=",z, " teta=",teta)
 x,y,z,teta = mgd(np.pi/2,0,1,0)
 print("x=",x," y=",y," z=",z, " teta=",teta)
 x,y,z,teta = mgd(3*np.pi/2,np.pi,1,0)
-print("x=",x," y=",y," z=",z
+print("x=",x," y=",y," z=",z," teta=",teta)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      , " teta=",teta)
-
-
-
-'''
 #Jacobienne
 JQ_R01 = np.array([[np.cos(q1), -np.sin(q1), 0, 0, 0, 0],
                    [np.sin(q1), np.cos(q1), 0, 0, 0, 0],
