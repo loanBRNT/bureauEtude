@@ -11,7 +11,7 @@ def traj(A, B, V):
     print("\ndab : ", dAB)
     # calcul tf
 
-    tf = 2 * dAB / V
+    tf = 2* dAB / V
     t1 = tf / 2
     print("tf : ", tf)
 
