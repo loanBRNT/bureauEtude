@@ -4,12 +4,15 @@ import math
 
 
 def traj(A, B, V):
-    Fe = 10  # frequence d'echantillonage
+    Fe = 100  # frequence d'echantillonage
 
-    # calcul dAB
-    dAB = np.sqrt((B[0] - A[0]) ** 2 + (B[1] - A[1]) ** 2 + (B[2] - A[2]) ** 2)
+    # Calcul dAB
+    diffx = B[0] - A[0]
+    diffy = B[1] - A[1]
+    diffz = B[2] - A[2]
+    dAB = np.sqrt(diffx **2 + diffy**2 + diffz**2)
     print("\ndab : ", dAB)
-    # calcul tf
+    # Calcul tf
 
     tf = 2* dAB / V
     t1 = tf / 2
@@ -21,28 +24,59 @@ def traj(A, B, V):
     sseconde = np.arange(0, tf + 1 / Fe, 1 / Fe)
 
     indext1 = len(s)//2
-    # de 0 a t1 on suit une 1ere loi et de t1 a tf une seconde loi
-    # calcul de s
+    # De 0 a t1 on suit une 1ere loi et de t1 a tf une seconde loi
+    # Calcul de s
     s[:indext1] = (V * (t[:indext1]**2)) / (2*t1) + 0
     s[indext1:] = (t[indext1:]**2 * -V) / (2 * t1) + (2 * V * t[indext1:]) - dAB
-    # calcul de spoint
+    # Calcul de spoint
     spoint[:indext1] = V * t[:indext1] / t1
     spoint[indext1:] = t[indext1:] * (-V / t1) + 2 * V
-    # calcul de sseconde
+    # Calcul de sseconde
     sseconde[:indext1] = V / t1
     sseconde[indext1:] = -V / t1
 
-    # affichage des 3 lois
+    # Calcul de x(s), y(s) et z(s)
+    x = A[0] + s * (diffx/dAB)
+    y = A[1] + s * (diffy/dAB)
+    z = A[2] + s * (diffz/dAB)
+
+    # Calcul de Xpoint Ypoint Zpoint
+    xpoint = spoint * (diffx / dAB)
+    ypoint = spoint * (diffy / dAB)
+    zpoint = spoint * (diffz / dAB)
+
+    # Calcul de Xseconde Yseconde Zseconde
+    xseconde = sseconde * (diffx / dAB)
+    yseconde = sseconde * (diffy / dAB)
+    zseconde = sseconde * (diffz / dAB)
+
+    # Affichage
 
     plt.figure(1)
-    plt.plot(t, s, "r+", label="position")
+    plt.plot(t, s, "+", label="position s")
+    plt.plot(t, x, "r+", label="x(s)")
+    plt.plot(t, y, "g+", label="y(s)")
+    plt.plot(t, z, "b+", label="z(s)")
     plt.legend()
     plt.show()
     plt.figure(2)
-    plt.plot(t, spoint, "b+", label="vitesse")
+    plt.plot(t, spoint, "+", label="vitesse s")
+    plt.plot(t, xpoint, "r+", label="x'(s)")
+    plt.plot(t, ypoint, "g+", label="y'(s)")
+    plt.plot(t, zpoint, "b+", label="z'(s)")
     plt.legend()
     plt.show()
     plt.figure(3)
-    plt.plot(t, sseconde, "g+", label="accélération")
+    plt.plot(t, sseconde, "+", label="accélération s")
+    plt.plot(t, xseconde, "r+", label="x''(s)")
+    plt.plot(t, yseconde, "g+", label="y''(s)")
+    plt.plot(t, zseconde, "b+", label="z''(s)")
     plt.legend()
     plt.show()
+
+    dico = {"x":x,"y":y,"z":z,
+            "xpoint":xpoint,"ypoint":ypoint,"zpoint":zpoint,
+            "xseconde":xseconde,"yseconde":yseconde,"zseconde":zseconde}
+
+    return dico
+

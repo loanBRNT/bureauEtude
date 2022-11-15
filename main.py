@@ -5,7 +5,7 @@ from mgd import*
 from traj import*
 
 A=[1,1,1]
-B=[6,6,6]
+B=[6,5,1]
 V=10
 traj(A,B,V)
 
