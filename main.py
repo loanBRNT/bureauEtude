@@ -4,21 +4,23 @@ from mgi import*
 from mgd import*
 from traj import*
 
+'''
 A=[1,1,1]
-B=[6,5,1]
+B=[6,1,1]
 V=10
 traj(A,B,V)
+'''
 
-'''print("\n")
+print("\n")
 
-x,y,z,teta = mgd(0,0,1,0)
+x,y,z,teta = mgd(0,np.pi/2,np.pi/2,np.pi/2)
 print("x=",x," y=",y," z=",z, " teta=",teta)
-x,y,z,teta = mgd(np.pi/2,0,1,0)
-print("x=",x," y=",y," z=",z, " teta=",teta)
-x,y,z,teta = mgd(3*np.pi/2,np.pi,1,0)
-print("x=",x," y=",y," z=",z," teta=",teta)
+sol1, sol2 = mgi(x,y,z,teta)
+print("1: ",sol1," 2: ",sol2)
+print(mgd(sol1[0],sol1[1],sol1[2],sol1[3]))
+print(mgd(sol2[0],sol2[1],sol2[2],sol2[3]))
 
-
+'''
 #Jacobienne
 JQ_R01 = np.array([[np.cos(q1), -np.sin(q1), 0, 0, 0, 0],
                    [np.sin(q1), np.cos(q1), 0, 0, 0, 0],
