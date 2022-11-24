@@ -6,6 +6,12 @@ def verif(M):
         return False
     return True
 
+def arrondir(M):
+    for i in range(len(M[:][0])):
+        for j in range(len(M[0][:])):
+            M[i][j] = round(M[i][j],2)
+    return M
+
 def mgd(q1,q2,q3,q4):
 
     T01 = np.array([[np.cos(q1), -np.sin(q1), 0, L1],
@@ -40,9 +46,11 @@ def mgd(q1,q2,q3,q4):
     T15 = np.dot(T12, T25)
     T05 = np.dot(T01, T15)
 
-    x=T05[0][3]
-    y=T05[1][3]
-    z=T05[2][3]
+    T05 = arrondir(T05)
+
+    x = T05[0][3]
+    y = T05[1][3]
+    z = T05[2][3]
 
     if not verif(T05):
         print("error")

@@ -11,12 +11,10 @@ def traj(A, B, V):
     diffy = B[1] - A[1]
     diffz = B[2] - A[2]
     dAB = np.sqrt(diffx **2 + diffy**2 + diffz**2)
-    print("\ndab : ", dAB)
     # Calcul tf
 
     tf = 2* dAB / V
     t1 = tf / 2
-    print("tf : ", tf)
 
     t = np.arange(0, tf + 1 / Fe, 1 / Fe)  # t de 0 a tf selon la Fe
     s = np.arange(0, tf + 1 / Fe, 1 / Fe)
@@ -76,7 +74,7 @@ def traj(A, B, V):
 
     dico = {"x":x,"y":y,"z":z,
             "xpoint":xpoint,"ypoint":ypoint,"zpoint":zpoint,
-            "xseconde":xseconde,"yseconde":yseconde,"zseconde":zseconde}
+            "xseconde":xseconde,"yseconde":yseconde,"zseconde":zseconde,"t":t}
 
     return dico
 
