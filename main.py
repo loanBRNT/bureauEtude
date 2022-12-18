@@ -76,7 +76,7 @@ for i in range(L):
     sol2['q2'].append(sol2i[1])
     sol2['q3'].append(sol2i[2])
     sol2['q4'].append(sol2i[3])
-    #print(mdi(dico['xpoint'],dico['ypoint'],dico['zpoint'],sol1i[0],sol1i[1],sol1i[2],sol1i[3]))
+    print(mdi(dico['xpoint'],dico['ypoint'],dico['zpoint'],sol1i[0],sol1i[1],sol1i[2],sol1i[3]))
 
 plt.figure(4)
 plt.plot(dico['t'],sol1['q1'], label="q1")
