@@ -88,8 +88,8 @@ while not stop:
 
     #debut de l'algo
     dico = traj(A,B,V)
-    sol1={'q1':[],'q2':[],'q3':[],'q4':[]}
-    sol2={'q1':[],'q2':[],'q3':[],'q4':[]}
+    sol1={'q1':[],'q2':[],'q3':[],'q4':[],'dq1':[],'dq2':[],'dq3':[],'dq4':[]}
+    sol2=sol1
     L = len(dico['x'])
     for i in range(L):
         sol1i, sol2i = mgi(dico['x'][i],dico['y'][i],dico['z'][i],teta)
@@ -102,8 +102,10 @@ while not stop:
         sol2['q3'].append(sol2i[2])
         sol2['q4'].append(sol2i[3])
 
-        #Il faudra retirer le # pour tester le mdi, une fois bon, faut juste ajouter dans des listes et afficher a la suite
-        #print(mdi(dico['xpoint'],dico['ypoint'],dico['zpoint'],sol1i[0],sol1i[1],sol1i[2],sol1i[3]))
+        
+        dsol1i = mdi(dico['xpoint'],dico['ypoint'],dico['zpoint'],sol1i[0],sol1i[1],sol1i[2],sol1i[3])
+        #dsol2i = mdi(dico['xpoint'], dico['ypoint'], dico['zpoint'], sol2i[0], sol2i[1], sol2i[2], sol2i[3])
+
 
     plt.figure(4)
     plt.plot(dico['t'],sol1['q1'], label="q1")
