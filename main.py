@@ -33,7 +33,7 @@ def saisieEtVerifEntree():
             xB = int(input("\nxB = "))
             yB = int(input("\nyB = "))
             zB = int(input("\nzB = "))
-            if (np.sqrt(xB ** 2 + yB ** 2) <= rayon) and (zB <= h1 + h2 + 2) and (zB >= h1 + h2 + 1):
+            if (np.sqrt(xB ** 2 + yB ** 2) <= rayon) and (zB <= h1 + h2 + 2) and (zB >= h1 + h2):
                 correctB = True
             else:
                 print("\nValeur(s) hors limites, reessayez...")
@@ -82,9 +82,6 @@ while not stop:
     print(f"Le Robot est en position : x={A[0]}, y={A[1]}, z={A[2]}, teta={teta}")
     #saisie des entrees
     B, teta, V = saisieEtVerifEntree()
-
-    '''V = 10
-    B=[3,1,3]'''
 
     #debut de l'algo
     dicoTraj = traj(A,B,V)
