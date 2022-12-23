@@ -44,7 +44,7 @@ ce que vous voulez afficher à l'écran.
 
 ![Caoture d'écran de la console pour sélection d'affichage](./assets/affichage.png)
 
-_Par exemple, ici, le programme affichera les qi et dqi de la première
+Par exemple, ici, le programme affichera les qi et dqi de la première
 solution ainsi que les différentes courbes liées à la position de
 l'organe terminal en fonction du temps _(s(t),ds(t),dds(t), x(t),dx(t)
 ,dxx(t),y(t),dy(t),ddy(t),z(t),dz(t),ddz(t))._
@@ -56,3 +56,9 @@ Soit vous décider de donner une nouvelle position au robot à partir de
 son emplacement actuel. Ou enfin, de quitter le programme.
 
 ![Capture d'écran de la console pour sélection de fin de boucle](./assets/fin.png)
+
+---
+
+### Points importants :
+- Il semblerait que l'orientation de l'organe terminal pose des problèmes
+lors de la simulation. Il est conseillé de le laisser à 0.
