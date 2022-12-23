@@ -87,12 +87,13 @@ while not stop:
     B=[3,1,3]'''
 
     #debut de l'algo
-    dico = traj(A,B,V)
+    dicoTraj = traj(A,B,V)
+
     sol1={'q1':[],'q2':[],'q3':[],'q4':[],'dq1':[],'dq2':[],'dq3':[],'dq4':[]}
-    sol2=sol1
-    L = len(dico['x'])
+    sol2={'q1':[],'q2':[],'q3':[],'q4':[],'dq1':[],'dq2':[],'dq3':[],'dq4':[]}
+    L = len(dicoTraj['x'])
     for i in range(L):
-        sol1i, sol2i = mgi(dico['x'][i],dico['y'][i],dico['z'][i],teta)
+        sol1i, sol2i = mgi(dicoTraj['x'][i],dicoTraj['y'][i],dicoTraj['z'][i],teta)
         sol1['q1'].append(sol1i[0])
         sol1['q2'].append(sol1i[1])
         sol1['q3'].append(sol1i[2])
@@ -102,27 +103,62 @@ while not stop:
         sol2['q3'].append(sol2i[2])
         sol2['q4'].append(sol2i[3])
 
-        
-        dsol1i = mdi(dico['xpoint'],dico['ypoint'],dico['zpoint'],sol1i[0],sol1i[1],sol1i[2],sol1i[3])
+        #dsol1i = mdi(dico['xpoint'],dico['ypoint'],dico['zpoint'],sol1i[0],sol1i[1],sol1i[2],sol1i[3])
         #dsol2i = mdi(dico['xpoint'], dico['ypoint'], dico['zpoint'], sol2i[0], sol2i[1], sol2i[2], sol2i[3])
 
+    print("--------- Choix de l'affichage ----------")
+    print("1 - Visualisation des q1")
+    print("2 - Visualisation des dq1 [ne fonctionne pas]")
+    print("3 - Visualisation des q2")
+    print("4 - Visualisation des dq2 [ne fonctionne pas]")
+    print("5 - Visualisation de la trajectoire")
+    print("-----------------------------------------")
+    choix = input("Vous pouvez entrer plusieurs chiffres :")
+    if "1" in choix:
+        plt.figure(5)
+        plt.title("SOLUTION 1")
+        plt.plot(dicoTraj['t'], sol1['q1'], "r", label="q1")
+        plt.plot(dicoTraj['t'], sol1['q2'], "b", label="q2")
+        plt.plot(dicoTraj['t'], sol1['q3'], "g", label="q3")
+        plt.plot(dicoTraj['t'], sol1['q4'], "y", label="q4")
+        plt.legend()
+        plt.show()
+    if "2" in choix:
+        print("NON FONCTIONNEL")
+    if "3" in choix:
+        plt.figure(6)
+        plt.title("SOLUTION 2")
+        plt.plot(dicoTraj['t'], sol2['q1'], "r", label="q1")
+        plt.plot(dicoTraj['t'], sol2['q2'], "b", label="q2")
+        plt.plot(dicoTraj['t'], sol2['q3'], "g", label="q3")
+        plt.plot(dicoTraj['t'], sol2['q4'], "y", label="q4")
+        plt.legend()
+        plt.show()
+    if "4" in choix:
+        print("NON FONCTIONNEL")
+    if "5" in choix:
+        plt.figure(1)
+        plt.plot(dicoTraj['t'], dicoTraj["s"], "+", label="s(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["x"], "b+", label="x(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["y"], "r+", label="y(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["z"], "g+", label="z(t)")
+        plt.legend()
+        plt.show()
+        plt.figure(2)
+        plt.plot(dicoTraj['t'], dicoTraj["spoint"], "+", label="ds(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["xpoint"], "b+", label="dx(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["ypoint"], "r+", label="dy(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["zpoint"], "g+", label="dz(t)")
+        plt.legend()
+        plt.show()
+        plt.figure(3)
+        plt.plot(dicoTraj['t'], dicoTraj["sseconde"], "+", label="dds(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["xseconde"], "b+", label="ddx(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["yseconde"], "r+", label="ddy(t)")
+        plt.plot(dicoTraj['t'], dicoTraj["zseconde"], "g+", label="ddz(t)")
+        plt.legend()
+        plt.show()
 
-    plt.figure(4)
-    plt.plot(dico['t'],sol1['q1'], label="q1")
-    plt.legend()
-    plt.show()
-    plt.figure(5)
-    plt.plot(dico['t'],sol1['q2'], label="q2")
-    plt.legend()
-    plt.show()
-    plt.figure(6)
-    plt.plot(dico['t'],sol1['q3'], label="q3")
-    plt.legend()
-    plt.show()
-    plt.figure(7)
-    plt.plot(dico['t'],sol1['q4'], label="q4")
-    plt.legend()
-    plt.show()
 
     choix = relanceProg(B,teta)
     if choix == 1:

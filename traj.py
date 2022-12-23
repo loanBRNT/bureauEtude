@@ -50,31 +50,9 @@ def traj(A, B, V):
 
     # Affichage
 
-    plt.figure(1)
-    plt.plot(t, s, "+", label="position s")
-    plt.plot(t, x, "r+", label="x(s)")
-    plt.plot(t, y, "g+", label="y(s)")
-    plt.plot(t, z, "b+", label="z(s)")
-    plt.legend()
-    plt.show()
-    plt.figure(2)
-    plt.plot(t, spoint, "+", label="vitesse s")
-    plt.plot(t, xpoint, "r+", label="x'(s)")
-    plt.plot(t, ypoint, "g+", label="y'(s)")
-    plt.plot(t, zpoint, "b+", label="z'(s)")
-    plt.legend()
-    plt.show()
-    plt.figure(3)
-    plt.plot(t, sseconde, "+", label="accélération s")
-    plt.plot(t, xseconde, "r+", label="x''(s)")
-    plt.plot(t, yseconde, "g+", label="y''(s)")
-    plt.plot(t, zseconde, "b+", label="z''(s)")
-    plt.legend()
-    plt.show()
-
-    dico = {"x":x,"y":y,"z":z,
-            "xpoint":xpoint,"ypoint":ypoint,"zpoint":zpoint,
-            "xseconde":xseconde,"yseconde":yseconde,"zseconde":zseconde,"t":t}
+    dico = {"x":x,"y":y,"z":z,"t":t,"s":s,
+            "xpoint":xpoint,"ypoint":ypoint,"zpoint":zpoint,"spoint":spoint,
+            "xseconde":xseconde,"yseconde":yseconde,"zseconde":zseconde,"sseconde":sseconde}
 
     return dico
 
