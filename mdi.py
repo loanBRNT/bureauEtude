@@ -4,7 +4,6 @@ from donnee import *
 def mdi(xpoint,ypoint,zpoint,q1,q2,q3,q4):
     # Jacobienne preferencielle
     # Indice preferenciel : j = 2
-    
 
     JQ_R01 = np.array([[np.cos(q1), -np.sin(q1), 0, 0, 0, 0],
                        [np.sin(q1), np.cos(q1), 0, 0, 0, 0],
@@ -38,5 +37,21 @@ def mdi(xpoint,ypoint,zpoint,q1,q2,q3,q4):
     JQ= np.dot(J_P34, JQ_pref)
     JQ= np.dot(JQ_R12, JQ)
     JQ= np.dot(JQ_R01, JQ)
-    print(JQ)
-    return np.dot(np.linalg.inv(JQ),np.array([[xpoint],[ypoint],[zpoint]]))
+
+    J=[[],[],[],[]]
+    i=0
+    for ligne in JQ:
+        if i >= 4:
+            continue
+        queDesZero=True
+        for val in ligne:
+            if val!=0:
+                queDesZero=False
+        if not queDesZero:
+            J[i]=ligne
+            i+=1
+    J = np.array(J)
+    Xpoint = np.array([xpoint,ypoint,zpoint,0])
+
+
+    return np.dot(np.linalg.pinv(J),Xpoint)

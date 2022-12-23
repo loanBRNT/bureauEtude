@@ -48,7 +48,7 @@ def saisieEtVerifEntree():
 
         while not correctTeta:
             print("\nEntrez l'angle Teta : ")
-            teta = int(input("\nteta = "))
+            teta = float(input("\nteta = "))
             if (teta <= 2 * np.pi / 2) and (teta >= -(2 * np.pi / 2)):
                 correctTeta = True
             else:
@@ -57,6 +57,8 @@ def saisieEtVerifEntree():
         # Tests generaux
         if verifConfig(xB, yB, zB, teta):
             correctConfig = True
+        else:
+            print("La configuration demandee est impossible")
 
     return [xB, yB, zB], teta, V
 
@@ -90,6 +92,7 @@ while not stop:
     sol2={'q1':[],'q2':[],'q3':[],'q4':[],'dq1':[],'dq2':[],'dq3':[],'dq4':[]}
     L = len(dicoTraj['x'])
     for i in range(L):
+        #MGI
         sol1i, sol2i = mgi(dicoTraj['x'][i],dicoTraj['y'][i],dicoTraj['z'][i],teta)
         sol1['q1'].append(sol1i[0])
         sol1['q2'].append(sol1i[1])
@@ -100,8 +103,17 @@ while not stop:
         sol2['q3'].append(sol2i[2])
         sol2['q4'].append(sol2i[3])
 
-        #dsol1i = mdi(dico['xpoint'],dico['ypoint'],dico['zpoint'],sol1i[0],sol1i[1],sol1i[2],sol1i[3])
-        #dsol2i = mdi(dico['xpoint'], dico['ypoint'], dico['zpoint'], sol2i[0], sol2i[1], sol2i[2], sol2i[3])
+        #MDI
+        dsol1i = mdi(dicoTraj['xpoint'][i],dicoTraj['ypoint'][i],dicoTraj['zpoint'][i],sol1i[0],sol1i[1],sol1i[2],sol1i[3])
+        dsol2i = mdi(dicoTraj['xpoint'][i],dicoTraj['ypoint'][i],dicoTraj['zpoint'][i], sol2i[0], sol2i[1], sol2i[2], sol2i[3])
+        sol1['dq1'].append(dsol1i[0])
+        sol1['dq2'].append(dsol1i[1])
+        sol1['dq3'].append(dsol1i[2])
+        sol1['dq4'].append(dsol1i[3])
+        sol2['dq1'].append(dsol2i[0])
+        sol2['dq2'].append(dsol2i[1])
+        sol2['dq3'].append(dsol2i[2])
+        sol2['dq4'].append(dsol2i[3])
 
     print("--------- Choix de l'affichage ----------")
     print("1 - Visualisation des q1")
@@ -113,7 +125,7 @@ while not stop:
     choix = input("Vous pouvez entrer plusieurs chiffres :")
     if "1" in choix:
         plt.figure(5)
-        plt.title("SOLUTION 1")
+        plt.title("SOLUTION 1 - Affichage des différents q")
         plt.plot(dicoTraj['t'], sol1['q1'], "r", label="q1")
         plt.plot(dicoTraj['t'], sol1['q2'], "b", label="q2")
         plt.plot(dicoTraj['t'], sol1['q3'], "g", label="q3")
@@ -121,10 +133,17 @@ while not stop:
         plt.legend()
         plt.show()
     if "2" in choix:
-        print("NON FONCTIONNEL")
+        plt.figure(7)
+        plt.title("SOLUTION 1 - Affichage des différents dq")
+        plt.plot(dicoTraj['t'], sol1['dq1'], "r", label="dq1")
+        plt.plot(dicoTraj['t'], sol1['dq2'], "b", label="dq2")
+        plt.plot(dicoTraj['t'], sol1['dq3'], "g", label="dq3")
+        plt.plot(dicoTraj['t'], sol1['dq4'], "y", label="dq4")
+        plt.legend()
+        plt.show()
     if "3" in choix:
         plt.figure(6)
-        plt.title("SOLUTION 2")
+        plt.title("SOLUTION 2 - Affichage des différents q")
         plt.plot(dicoTraj['t'], sol2['q1'], "r", label="q1")
         plt.plot(dicoTraj['t'], sol2['q2'], "b", label="q2")
         plt.plot(dicoTraj['t'], sol2['q3'], "g", label="q3")
@@ -132,9 +151,17 @@ while not stop:
         plt.legend()
         plt.show()
     if "4" in choix:
-        print("NON FONCTIONNEL")
+        plt.figure(8)
+        plt.title("SOLUTION 2 - Affichage des différents dq")
+        plt.plot(dicoTraj['t'], sol2['dq1'], "r", label="dq1")
+        plt.plot(dicoTraj['t'], sol2['dq2'], "b", label="dq2")
+        plt.plot(dicoTraj['t'], sol2['dq3'], "g", label="dq3")
+        plt.plot(dicoTraj['t'], sol2['dq4'], "y", label="dq4")
+        plt.legend()
+        plt.show()
     if "5" in choix:
         plt.figure(1)
+        plt.title("Evolution de la position")
         plt.plot(dicoTraj['t'], dicoTraj["s"], "+", label="s(t)")
         plt.plot(dicoTraj['t'], dicoTraj["x"], "b+", label="x(t)")
         plt.plot(dicoTraj['t'], dicoTraj["y"], "r+", label="y(t)")
@@ -142,6 +169,7 @@ while not stop:
         plt.legend()
         plt.show()
         plt.figure(2)
+        plt.title("Evolution de la vitesse")
         plt.plot(dicoTraj['t'], dicoTraj["spoint"], "+", label="ds(t)")
         plt.plot(dicoTraj['t'], dicoTraj["xpoint"], "b+", label="dx(t)")
         plt.plot(dicoTraj['t'], dicoTraj["ypoint"], "r+", label="dy(t)")
@@ -149,13 +177,13 @@ while not stop:
         plt.legend()
         plt.show()
         plt.figure(3)
+        plt.title("Evolution de l'acceleration'")
         plt.plot(dicoTraj['t'], dicoTraj["sseconde"], "+", label="dds(t)")
         plt.plot(dicoTraj['t'], dicoTraj["xseconde"], "b+", label="ddx(t)")
         plt.plot(dicoTraj['t'], dicoTraj["yseconde"], "r+", label="ddy(t)")
         plt.plot(dicoTraj['t'], dicoTraj["zseconde"], "g+", label="ddz(t)")
         plt.legend()
         plt.show()
-
 
     choix = relanceProg(B,teta)
     if choix == 1:
