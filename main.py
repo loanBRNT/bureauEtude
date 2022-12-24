@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
 from mdi import*
 from mgi import*
 from mgd import*
@@ -177,12 +178,17 @@ while not stop:
         plt.legend()
         plt.show()
         plt.figure(3)
-        plt.title("Evolution de l'acceleration'")
+        plt.title("Evolution de l'acceleration")
         plt.plot(dicoTraj['t'], dicoTraj["sseconde"], "+", label="dds(t)")
         plt.plot(dicoTraj['t'], dicoTraj["xseconde"], "b+", label="ddx(t)")
         plt.plot(dicoTraj['t'], dicoTraj["yseconde"], "r+", label="ddy(t)")
         plt.plot(dicoTraj['t'], dicoTraj["zseconde"], "g+", label="ddz(t)")
         plt.legend()
+        plt.show()
+        fig = plt.figure()
+        ax = plt.axes(projection='3d')
+        ax.plot3D(dicoTraj['x'], dicoTraj['y'], dicoTraj['z'])
+        ax.set_title('Trajectoire en 3D')
         plt.show()
 
     choix = relanceProg(B,teta)

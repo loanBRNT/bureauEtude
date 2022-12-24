@@ -1,7 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import math
-
 
 def traj(A, B, V):
     Fe = 100  # frequence d'echantillonage
